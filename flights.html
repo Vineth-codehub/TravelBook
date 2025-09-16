@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking - TravelBook | Domestic & International Flights</title>
+    <meta name="description" content="Book domestic and international flights at TravelBook. Compare prices from 500+ airlines, instant booking, secure payments. Find the best flight deals now.">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, hsl(210 100% 50%) 0%, hsl(210 100% 60%) 100%);
+            color: white;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            margin-bottom: 2rem;
+            transition: var(--transition);
+        }
+        
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .page-icon {
+            width: 5rem;
+            height: 5rem;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .booking-form {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-xl);
+            margin: 2rem 0;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: hsl(var(--foreground));
+        }
+        
+        .form-input, .form-select {
+            padding: 0.75rem;
+            border: 1px solid hsl(var(--border));
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: hsl(var(--primary));
+            box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+        }
+        
+        .popular-routes {
+            background: hsl(var(--muted));
+            padding: 4rem 0;
+        }
+        
+        .route-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .route-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .route-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .route-cities {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+        
+        .route-info {
+            text-align: center;
+        }
+        
+        .airline-name {
+            color: hsl(var(--primary));
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .route-duration {
+            color: hsl(var(--muted-foreground));
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="logo">
+                    <span class="logo-text">TravelBook</span>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="trains.html" class="nav-link">Trains</a>
+                    <a href="cabs.html" class="nav-link">Cabs</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <a href="index.html" class="back-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m12 19-7-7 7-7"/>
+                    <path d="M19 12H5"/>
+                </svg>
+                Back to Home
+            </a>
+            
+            <div class="page-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21 4 19 4s-2 2-3.5 3.5L11 16l-8.2 1.8c-.5.1-.9.6-.9 1.1v.5c0 .6.4 1 1 1h.5c.5 0 1-.4 1.1-.9L6 17l1.5-1.5L17.8 19.2z"/>
+                </svg>
+            </div>
+            
+            <h1 class="hero-title">Book Flight Tickets</h1>
+            <p class="hero-subtitle">Domestic and international flights from 500+ airlines worldwide</p>
+        </div>
+    </section>
+
+    <!-- Flight Booking Form -->
+    <section style="padding: 4rem 0;">
+        <div class="container">
+            <form class="booking-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">From</label>
+                        <select class="form-select" required>
+                            <option value="">Select departure city</option>
+                            <option value="DEL">New Delhi (DEL)</option>
+                            <option value="BOM">Mumbai (BOM)</option>
+                            <option value="BLR">Bangalore (BLR)</option>
+                            <option value="MAA">Chennai (MAA)</option>
+                            <option value="CCU">Kolkata (CCU)</option>
+                            <option value="HYD">Hyderabad (HYD)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">To</label>
+                        <select class="form-select" required>
+                            <option value="">Select destination city</option>
+                            <option value="DEL">New Delhi (DEL)</option>
+                            <option value="BOM">Mumbai (BOM)</option>
+                            <option value="BLR">Bangalore (BLR)</option>
+                            <option value="MAA">Chennai (MAA)</option>
+                            <option value="CCU">Kolkata (CCU)</option>
+                            <option value="HYD">Hyderabad (HYD)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Departure Date</label>
+                        <input type="date" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Return Date</label>
+                        <input type="date" class="form-input">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Passengers</label>
+                        <select class="form-select" required>
+                            <option value="1">1 Passenger</option>
+                            <option value="2">2 Passengers</option>
+                            <option value="3">3 Passengers</option>
+                            <option value="4">4 Passengers</option>
+                            <option value="5">5+ Passengers</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Class</label>
+                        <select class="form-select" required>
+                            <option value="economy">Economy</option>
+                            <option value="premium-economy">Premium Economy</option>
+                            <option value="business">Business</option>
+                            <option value="first">First Class</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Trip Type</label>
+                        <select class="form-select" required>
+                            <option value="round-trip">Round Trip</option>
+                            <option value="one-way">One Way</option>
+                            <option value="multi-city">Multi City</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" style="display: flex; align-items: end;">
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            Search Flights
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Popular Routes Section -->
+    <section class="popular-routes">
+        <div class="container">
+            <h2 class="section-title">Popular Flight Routes</h2>
+            
+            <div class="widgets-grid" style="margin-top: 2rem;">
+                <div class="route-card">
+                    <div class="route-header">
+                        <span class="route-cities">Delhi</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21 4 19 4s-2 2-3.5 3.5L11 16l-8.2 1.8c-.5.1-.9.6-.9 1.1v.5c0 .6.4 1 1 1h.5c.5 0 1-.4 1.1-.9L6 17l1.5-1.5L17.8 19.2z"/>
+                        </svg>
+                        <span class="route-cities">Mumbai</span>
+                    </div>
+                    <div class="route-info">
+                        <div class="airline-name">Air India</div>
+                        <div class="route-duration">2h 15m • From ₹4,500</div>
+                    </div>
+                </div>
+                
+                <div class="route-card">
+                    <div class="route-header">
+                        <span class="route-cities">Bangalore</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21 4 19 4s-2 2-3.5 3.5L11 16l-8.2 1.8c-.5.1-.9.6-.9 1.1v.5c0 .6.4 1 1 1h.5c.5 0 1-.4 1.1-.9L6 17l1.5-1.5L17.8 19.2z"/>
+                        </svg>
+                        <span class="route-cities">Chennai</span>
+                    </div>
+                    <div class="route-info">
+                        <div class="airline-name">IndiGo</div>
+                        <div class="route-duration">1h 20m • From ₹3,200</div>
+                    </div>
+                </div>
+                
+                <div class="route-card">
+                    <div class="route-header">
+                        <span class="route-cities">Kolkata</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21 4 19 4s-2 2-3.5 3.5L11 16l-8.2 1.8c-.5.1-.9.6-.9 1.1v.5c0 .6.4 1 1 1h.5c.5 0 1-.4 1.1-.9L6 17l1.5-1.5L17.8 19.2z"/>
+                        </svg>
+                        <span class="route-cities">Delhi</span>
+                    </div>
+                    <div class="route-info">
+                        <div class="airline-name">SpiceJet</div>
+                        <div class="route-duration">2h 30m • From ₹5,800</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

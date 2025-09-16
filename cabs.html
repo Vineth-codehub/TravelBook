@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cab Booking - TravelBook | Local & Outstation Cabs</title>
+    <meta name="description" content="Book local and outstation cabs at TravelBook. Multiple car options, rated drivers, safe & secure rides. Your trusted partner for comfortable travel.">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, hsl(25 95% 50%) 0%, hsl(25 95% 60%) 100%);
+            color: white;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            margin-bottom: 2rem;
+            transition: var(--transition);
+        }
+        
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .page-icon {
+            width: 5rem;
+            height: 5rem;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .booking-form {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-xl);
+            margin: 2rem 0;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: hsl(var(--foreground));
+        }
+        
+        .form-input, .form-select {
+            padding: 0.75rem;
+            border: 1px solid hsl(var(--border));
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: hsl(25 95% 50%);
+            box-shadow: 0 0 0 3px hsl(25 95% 50% / 0.1);
+        }
+        
+        .cab-types {
+            background: hsl(var(--muted));
+            padding: 4rem 0;
+        }
+        
+        .cab-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .cab-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .cab-icon {
+            width: 4rem;
+            height: 4rem;
+            background: hsl(25 95% 95%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: hsl(25 95% 50%);
+        }
+        
+        .cab-type {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .cab-capacity {
+            color: hsl(var(--muted-foreground));
+            margin-bottom: 0.5rem;
+        }
+        
+        .cab-price {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: hsl(25 95% 50%);
+            margin-bottom: 0.5rem;
+        }
+        
+        .cab-example {
+            font-size: 0.875rem;
+            color: hsl(var(--muted-foreground));
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="logo">
+                    <span class="logo-text">TravelBook</span>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="flights.html" class="nav-link">Flights</a>
+                    <a href="trains.html" class="nav-link">Trains</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <a href="index.html" class="back-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m12 19-7-7 7-7"/>
+                    <path d="M19 12H5"/>
+                </svg>
+                Back to Home
+            </a>
+            
+            <div class="page-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18.4 10c-.2-.6-.8-1-1.4-1H7c-.6 0-1.2.4-1.4 1L3.5 11.1C2.7 11.3 2 12.1 2 13v3c0 .6.4 1 1 1h2"/>
+                    <circle cx="7" cy="17" r="2"/>
+                    <path d="M9 17h6"/>
+                    <circle cx="17" cy="17" r="2"/>
+                </svg>
+            </div>
+            
+            <h1 class="hero-title">Book a Cab</h1>
+            <p class="hero-subtitle">Reliable and comfortable rides for local and outstation travel</p>
+        </div>
+    </section>
+
+    <!-- Cab Booking Form -->
+    <section style="padding: 4rem 0;">
+        <div class="container">
+            <form class="booking-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Pickup Location</label>
+                        <input type="text" class="form-input" placeholder="Enter pickup location" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Drop Location</label>
+                        <input type="text" class="form-input" placeholder="Enter drop location" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Pickup Date</label>
+                        <input type="date" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Pickup Time</label>
+                        <input type="time" class="form-input" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Cab Type</label>
+                        <select class="form-select" required>
+                            <option value="hatchback">Hatchback (₹12/km)</option>
+                            <option value="sedan" selected>Sedan (₹15/km)</option>
+                            <option value="suv">SUV (₹20/km)</option>
+                            <option value="luxury">Luxury (₹35/km)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Trip Type</label>
+                        <select class="form-select" required>
+                            <option value="local">Local (Within City)</option>
+                            <option value="outstation">Outstation</option>
+                            <option value="airport">Airport Transfer</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Passengers</label>
+                        <select class="form-select" required>
+                            <option value="1">1 Passenger</option>
+                            <option value="2">2 Passengers</option>
+                            <option value="3">3 Passengers</option>
+                            <option value="4">4 Passengers</option>
+                            <option value="6">6+ Passengers</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" style="display: flex; align-items: end;">
+                        <button type="submit" class="btn btn-primary" style="width: 100%; background: hsl(25 95% 50%);">
+                            Find Cabs
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Cab Types Section -->
+    <section class="cab-types">
+        <div class="container">
+            <h2 class="section-title">Available Cab Types</h2>
+            
+            <div class="features-grid" style="margin-top: 2rem;">
+                <div class="cab-card">
+                    <div class="cab-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18.4 10c-.2-.6-.8-1-1.4-1H7c-.6 0-1.2.4-1.4 1L3.5 11.1C2.7 11.3 2 12.1 2 13v3c0 .6.4 1 1 1h2"/>
+                            <circle cx="7" cy="17" r="2"/>
+                            <path d="M9 17h6"/>
+                            <circle cx="17" cy="17" r="2"/>
+                        </svg>
+                    </div>
+                    <div class="cab-type">Hatchback</div>
+                    <div class="cab-capacity">4 Seats</div>
+                    <div class="cab-price">₹12/km</div>
+                    <div class="cab-example">Swift, i10</div>
+                </div>
+                
+                <div class="cab-card">
+                    <div class="cab-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18.4 10c-.2-.6-.8-1-1.4-1H7c-.6 0-1.2.4-1.4 1L3.5 11.1C2.7 11.3 2 12.1 2 13v3c0 .6.4 1 1 1h2"/>
+                            <circle cx="7" cy="17" r="2"/>
+                            <path d="M9 17h6"/>
+                            <circle cx="17" cy="17" r="2"/>
+                        </svg>
+                    </div>
+                    <div class="cab-type">Sedan</div>
+                    <div class="cab-capacity">4 Seats</div>
+                    <div class="cab-price">₹15/km</div>
+                    <div class="cab-example">Dzire, Etios</div>
+                </div>
+                
+                <div class="cab-card">
+                    <div class="cab-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18.4 10c-.2-.6-.8-1-1.4-1H7c-.6 0-1.2.4-1.4 1L3.5 11.1C2.7 11.3 2 12.1 2 13v3c0 .6.4 1 1 1h2"/>
+                            <circle cx="7" cy="17" r="2"/>
+                            <path d="M9 17h6"/>
+                            <circle cx="17" cy="17" r="2"/>
+                        </svg>
+                    </div>
+                    <div class="cab-type">SUV</div>
+                    <div class="cab-capacity">6-7 Seats</div>
+                    <div class="cab-price">₹20/km</div>
+                    <div class="cab-example">Innova, Ertiga</div>
+                </div>
+                
+                <div class="cab-card">
+                    <div class="cab-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18.4 10c-.2-.6-.8-1-1.4-1H7c-.6 0-1.2.4-1.4 1L3.5 11.1C2.7 11.3 2 12.1 2 13v3c0 .6.4 1 1 1h2"/>
+                            <circle cx="7" cy="17" r="2"/>
+                            <path d="M9 17h6"/>
+                            <circle cx="17" cy="17" r="2"/>
+                        </svg>
+                    </div>
+                    <div class="cab-type">Luxury</div>
+                    <div class="cab-capacity">4 Seats</div>
+                    <div class="cab-price">₹35/km</div>
+                    <div class="cab-example">BMW, Audi</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
