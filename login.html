@@ -1,3 +1,5 @@
+<!-- [file name]: login.html
+[file content begin] -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,101 +8,592 @@
   <title>TravelBook - Login</title>
   <link rel="stylesheet" href="style.css">
   <style>
+    /* Background with gradient animation */
     body {
       display: flex;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      background: linear-gradient(135deg, hsl(210 100% 50%), hsl(25 95% 53%));
+      background: linear-gradient(135deg, #2563eb, #f97316, #14b8a6, #9333ea);
+      background-size: 300% 300%;
+      animation: gradientShift 10s ease infinite;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      padding: 1rem;
     }
 
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Glassmorphism login card */
     .login-container {
-      background: white;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
       padding: 2.5rem;
-      border-radius: 1rem;
-      box-shadow: var(--shadow-xl);
+      border-radius: 1.25rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
       width: 100%;
-      max-width: 400px;
+      max-width: 450px;
+      text-align: center;
       animation: fadeIn 0.8s ease;
     }
 
-    .login-title {
-      font-size: 1.75rem;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Logo */
+    .logo {
+      font-size: 2rem;
       font-weight: bold;
-      color: hsl(var(--primary));
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+
+    .login-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #fff;
       margin-bottom: 1.5rem;
-      text-align: center;
     }
 
     .form-group {
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
+      text-align: left;
+      position: relative;
     }
 
     .form-label {
       display: block;
       margin-bottom: 0.5rem;
       font-weight: 500;
-      color: hsl(var(--foreground));
+      color: #fff;
     }
 
     .form-input {
       width: 100%;
-      padding: 0.75rem;
-      border: 1px solid hsl(var(--border));
-      border-radius: 0.5rem;
+      padding: 0.85rem 3rem 0.85rem 1rem;
+      border: none;
+      border-radius: 0.75rem;
       font-size: 1rem;
+      outline: none;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
       transition: var(--transition);
     }
 
-    .form-input:focus {
-      border-color: hsl(var(--primary));
-      box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
-      outline: none;
+    .form-input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
     }
 
+    .form-input:focus {
+      background: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
+    }
+
+    /* Input icons */
+    .form-group i {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Password toggle */
+    .password-toggle {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, 0.7);
+      cursor: pointer;
+    }
+
+    /* Button */
     .btn-login {
       width: 100%;
-      padding: 0.75rem;
-      background: hsl(var(--primary));
+      padding: 0.9rem;
+      background: linear-gradient(135deg, #2563eb, #f97316);
       color: white;
       font-weight: 600;
       font-size: 1rem;
       border: none;
-      border-radius: 0.5rem;
+      border-radius: 0.75rem;
       cursor: pointer;
-      transition: var(--transition);
+      transition: transform 0.2s, box-shadow 0.3s ease;
     }
 
     .btn-login:hover {
-      background: hsl(var(--primary-hover));
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Links */
+    .links {
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+    }
+
+    .links a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .links a:hover {
+      color: #ffd700;
+    }
+
+    .signup-link {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .signup-link a {
+      color: #ffd700;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .signup-link a:hover {
+      text-decoration: underline;
     }
 
     .error-message {
-      color: #ef4444;
+      color: #ff4d4d;
       font-size: 0.875rem;
       margin-top: 0.5rem;
       display: none;
+      text-align: left;
+    }
+
+    .success-message {
+      color: #4ade80;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+      display: none;
+      text-align: center;
+      padding: 0.75rem;
+      background: rgba(34, 197, 94, 0.2);
+      border-radius: 0.5rem;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    /* Floating Chatbot Styles */
+    #chatbot-widget {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    #chatbot-toggle {
+      background: linear-gradient(135deg, hsl(213 94% 68%), hsl(25 95% 53%));
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: white;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      animation: bounce 2s infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    #chatbot-window {
+      width: 320px;
+      height: 420px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(15px);
+      border-radius: 16px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      animation: fadeIn 0.3s ease;
+      position: absolute;
+      bottom: 70px;
+      right: 0;
+    }
+
+    #chatbot-window.hidden { 
+      display: none; 
+    }
+
+    #chatbot-header {
+      background: linear-gradient(135deg, hsl(213 94% 68%), hsl(25 95% 53%));
+      color: white;
+      padding: 12px;
+      font-weight: bold;
+      text-align: center;
+      position: relative;
+    }
+
+    #chatbot-close {
+      position: absolute;
+      right: 10px;
+      cursor: pointer;
+    }
+
+    #chatbot-messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      font-size: 0.9rem;
+    }
+
+    .msg {
+      margin: 6px 0;
+      padding: 8px 12px;
+      border-radius: 12px;
+      max-width: 80%;
+      word-wrap: break-word;
+    }
+
+    .user { 
+      background: hsl(213 94% 68%); 
+      color: white; 
+      margin-left: auto; 
+      border-bottom-right-radius: 0; 
+    }
+
+    .bot { 
+      background: #f3f4f6; 
+      color: #333; 
+      border-bottom-left-radius: 0; 
+    }
+
+    /* Typing dots */
+    .typing span {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      margin: 0 1px;
+      background: #666;
+      border-radius: 50%;
+      animation: blink 1s infinite;
+    }
+
+    .typing span:nth-child(2){ animation-delay: 0.2s; }
+    .typing span:nth-child(3){ animation-delay: 0.4s; }
+
+    @keyframes blink { 
+      0%, 80%, 100% { opacity: 0.3; } 
+      40% { opacity: 1; } 
+    }
+
+    #chatbot-quick {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 8px;
+      border-top: 1px solid #ddd;
+    }
+
+    #chatbot-quick button {
+      flex: 1;
+      padding: 6px 8px;
+      border: none;
+      border-radius: 8px;
+      background: hsl(213 94% 90%);
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+    #chatbot-quick button:hover { 
+      background: hsl(213 94% 75%); 
+    }
+
+    .chat-input-container { 
+      display: flex; 
+      border-top: 1px solid #ddd; 
+    }
+
+    #chatbot-input {
+      flex: 1; 
+      border: none; 
+      padding: 10px; 
+      font-size: 0.9rem;
+      border-radius: 0 0 0 12px; 
+      outline: none;
+    }
+
+    #chatbot-send {
+      background: hsl(25 95% 53%);
+      color: #fff; 
+      border: none; 
+      padding: 10px 15px;
+      border-radius: 0 0 12px 0; 
+      cursor: pointer;
+    }
+
+    #chatbot-send:hover { 
+      background: hsl(25 95% 45%); 
+    }
+
+    /* Responsive chatbot */
+    @media (max-width: 480px) {
+      #chatbot-window {
+        width: 280px;
+        right: 0;
+      }
+      
+      #chatbot-widget {
+        right: 10px;
+        bottom: 10px;
+      }
+      
+      .login-container {
+        padding: 2rem 1.5rem;
+      }
+      
+      .links {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: center;
+      }
     }
   </style>
 </head>
 <body>
   <div class="login-container">
-    <h2 class="login-title">Login to TravelBook</h2>
+    <div class="logo">🌍 TravelBook</div>
+    <h2 class="login-title">Welcome Back</h2>
     <form id="loginForm">
       <div class="form-group">
         <label class="form-label">Email</label>
-        <input type="email" id="email" class="form-input" required>
+        <input type="email" id="email" class="form-input" placeholder="Enter your email" required>
+        <i class="fas fa-envelope"></i>
       </div>
       <div class="form-group">
         <label class="form-label">Password</label>
-        <input type="password" id="password" class="form-input" required>
+        <input type="password" id="password" class="form-input" placeholder="Enter your password" required>
+        <button type="button" class="password-toggle" id="togglePassword">
+          <i class="fas fa-eye"></i>
+        </button>
         <div id="error" class="error-message">Invalid email or password</div>
       </div>
       <button type="submit" class="btn-login">Login</button>
+      <div id="successMessage" class="success-message">Login successful! Redirecting...</div>
+      
+      <div class="links">
+        <a href="forgot-password.html">Forgot Password?</a>
+        <a href="signup.html">Need Help?</a>
+      </div>
+      
+      <div class="signup-link">
+        Don't have an account? <a href="signup.html">Sign up now</a>
+      </div>
     </form>
   </div>
 
-  <script src="login.js"></script>
+  <!-- Floating Chatbot Widget -->
+  <div id="chatbot-widget">
+    <button id="chatbot-toggle">💬</button>
+    <div id="chatbot-window" class="hidden">
+      <div id="chatbot-header">
+        TravelBot 
+        <span id="chatbot-close">✖</span>
+      </div>
+      <div id="chatbot-messages"></div>
+      <div id="chatbot-quick">
+        <button data-msg="login">🔑 Login Help</button>
+        <button data-msg="signup">📝 Create Account</button>
+        <button data-msg="password">🔒 Forgot Password</button>
+        <button data-msg="help">❓ Help</button>
+      </div>
+      <div class="chat-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="chatbot-send">➤</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Login form functionality
+    const loginForm = document.getElementById("loginForm");
+    const errorBox = document.getElementById("error");
+    const successMessage = document.getElementById("successMessage");
+    const togglePassword = document.getElementById("togglePassword");
+
+    // Password visibility toggle
+    togglePassword.addEventListener("click", function() {
+      const passField = document.getElementById("password");
+      const type = passField.getAttribute("type") === "password" ? "text" : "password";
+      passField.setAttribute("type", type);
+      this.querySelector("i").classList.toggle("fa-eye");
+      this.querySelector("i").classList.toggle("fa-eye-slash");
+    });
+
+    loginForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      // Reset messages
+      errorBox.style.display = "none";
+      successMessage.style.display = "none";
+
+      // Demo credentials
+      const demoUser = { email: "vineth@gmail.com", password: "123456" };
+
+      if (email === demoUser.email && password === demoUser.password) {
+        // Show success message
+        successMessage.style.display = "block";
+        
+        // Store auth status and redirect
+        setTimeout(() => {
+          localStorage.setItem("auth", "true");
+          window.location.href = "index.html";
+        }, 1500);
+      } else {
+        errorBox.style.display = "block";
+      }
+    });
+
+    // Floating Chatbot functionality
+    const chatbotToggle = document.getElementById("chatbot-toggle");
+    const chatWindow = document.getElementById("chatbot-window");
+    const closeBtn = document.getElementById("chatbot-close");
+    const messages = document.getElementById("chatbot-messages");
+    const input = document.getElementById("chatbot-input");
+    const sendBtn = document.getElementById("chatbot-send");
+    const quickBtns = document.querySelectorAll("#chatbot-quick button");
+
+    // Toggle chatbot open/close
+    chatbotToggle.addEventListener("click", () => {
+      chatWindow.classList.toggle("hidden");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      chatWindow.classList.add("hidden");
+    });
+
+    // Send message function
+    function sendMessage(text, sender="user") {
+      const msg = document.createElement("div");
+      msg.className = `msg ${sender}`;
+      msg.textContent = text;
+      messages.appendChild(msg);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    // Show typing indicator
+    function showTyping() {
+      const typing = document.createElement("div");
+      typing.className = "msg bot typing";
+      typing.innerHTML = "<span></span><span></span><span></span>";
+      messages.appendChild(typing);
+      messages.scrollTop = messages.scrollHeight;
+      return typing;
+    }
+
+    // Remove typing indicator
+    function removeTyping() {
+      const typing = document.querySelector(".typing");
+      if (typing) typing.remove();
+    }
+
+    // Bot response logic for login page
+    function botReply(userText) {
+      let reply = "🤖 I'm TravelBot! I can help you with login issues or creating a new account. What do you need?";
+
+      const text = userText.toLowerCase();
+      
+      if (text.includes("login") || text.includes("sign in")) {
+        reply = "🔑 Use your email and password to log in. Demo credentials: vineth@gmail.com / 123456";
+      } else if (text.includes("signup") || text.includes("register") || text.includes("create account")) {
+        reply = "📝 Don't have an account? Click 'Sign up now' below the login form to create your TravelBook account!";
+      } else if (text.includes("password") || text.includes("forgot")) {
+        reply = "🔒 Forgot your password? Click 'Forgot Password?' to reset it. For demo, use: vineth@gmail.com";
+      } else if (text.includes("hello") || text.includes("hi") || text.includes("hey")) {
+        reply = "👋 Hello! Welcome to TravelBook login! Need help signing in?";
+      } else if (text.includes("help") || text.includes("support")) {
+        reply = "❓ Our support team is available 24/7. Contact us at support@travelbook.com or call +91 98765 43210";
+      } else if (text.includes("thank") || text.includes("thanks")) {
+        reply = "😊 You're welcome! Happy to help with your travel needs.";
+      }
+
+      sendMessage(reply, "bot");
+    }
+
+    // Handle message sending
+    function handleSend() {
+      const text = input.value.trim();
+      if (!text) return;
+      
+      sendMessage(text, "user");
+      input.value = "";
+      
+      const typing = showTyping();
+      setTimeout(() => {
+        removeTyping();
+        botReply(text);
+      }, 1000);
+    }
+
+    // Event listeners
+    sendBtn.addEventListener("click", handleSend);
+    input.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") handleSend();
+    });
+
+    // Quick button handlers
+    quickBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const text = btn.dataset.msg;
+        sendMessage(text, "user");
+        const typing = showTyping();
+        setTimeout(() => {
+          removeTyping();
+          botReply(text);
+        }, 1000);
+      });
+    });
+
+    // Auto welcome message
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        sendMessage("👋 Hi! I'm TravelBot. I can help you with login issues or guide you to create a new account. How can I assist you?", "bot");
+      }, 1500);
+    });
+
+    // Redirect functionality for quick buttons
+    document.querySelector('button[data-msg="signup"]').addEventListener('click', function() {
+      setTimeout(() => {
+        window.location.href = "signup.html";
+      }, 1500);
+    });
+
+    document.querySelector('button[data-msg="password"]').addEventListener('click', function() {
+      setTimeout(() => {
+        window.location.href = "forgot-password.html";
+      }, 1500);
+    });
+  </script>
+
+  <!-- FontAwesome for icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>
+<!-- [file content end] -->

@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - TravelBook | Create Your Account</title>
+    <meta name="description" content="Create your TravelBook account to book flights, trains, and cabs with ease. Join our travel community today.">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Background with gradient animation */
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #2563eb, #f97316, #14b8a6, #9333ea);
+            background-size: 300% 300%;
+            animation: gradientShift 10s ease infinite;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            padding: 1rem;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Glassmorphism signup card */
+        .signup-container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            padding: 2.5rem;
+            border-radius: 1.25rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+            width: 100%;
+            max-width: 480px;
+            text-align: center;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Logo */
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .signup-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+            text-align: left;
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #fff;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 2.5rem 0.75rem 0.75rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            transition: var(--transition);
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-input:focus {
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
+        }
+
+        /* Input icons */
+        .form-group i {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Password toggle */
+        .password-toggle {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+        }
+
+        /* Button */
+        .btn-signup {
+            width: 100%;
+            padding: 0.85rem;
+            background: linear-gradient(135deg, #2563eb, #f97316);
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.3s ease;
+            margin-top: 0.5rem;
+        }
+
+        .btn-signup:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Links */
+        .links {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            font-size: 0.9rem;
+            gap: 1rem;
+        }
+
+        .links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .links a:hover {
+            color: #ffd700;
+        }
+
+        .error-message {
+            color: #ff4d4d;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+            text-align: left;
+        }
+
+        .success-message {
+            color: #4ade80;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+            text-align: center;
+        }
+
+        /* Terms checkbox */
+        .terms-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .terms-group input[type="checkbox"] {
+            margin-top: 0.25rem;
+        }
+
+        .terms-text {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-align: left;
+        }
+
+        .terms-text a {
+            color: #ffd700;
+            text-decoration: none;
+        }
+
+        .terms-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* Form row for name fields */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .signup-container {
+                padding: 2rem 1.5rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Floating Chatbot Styles */
+        #chatbot-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        #chatbot-toggle {
+            background: linear-gradient(135deg, hsl(213 94% 68%), hsl(25 95% 53%));
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: white;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            animation: bounce 2s infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        #chatbot-window {
+            width: 320px;
+            height: 420px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 16px;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            animation: fadeIn 0.3s ease;
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+        }
+
+        #chatbot-window.hidden { 
+            display: none; 
+        }
+
+        #chatbot-header {
+            background: linear-gradient(135deg, hsl(213 94% 68%), hsl(25 95% 53%));
+            color: white;
+            padding: 12px;
+            font-weight: bold;
+            text-align: center;
+            position: relative;
+        }
+
+        #chatbot-close {
+            position: absolute;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        #chatbot-messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            font-size: 0.9rem;
+        }
+
+        .msg {
+            margin: 6px 0;
+            padding: 8px 12px;
+            border-radius: 12px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .user { 
+            background: hsl(213 94% 68%); 
+            color: white; 
+            margin-left: auto; 
+            border-bottom-right-radius: 0; 
+        }
+
+        .bot { 
+            background: #f3f4f6; 
+            color: #333; 
+            border-bottom-left-radius: 0; 
+        }
+
+        /* Typing dots */
+        .typing span {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            margin: 0 1px;
+            background: #666;
+            border-radius: 50%;
+            animation: blink 1s infinite;
+        }
+
+        .typing span:nth-child(2){ animation-delay: 0.2s; }
+        .typing span:nth-child(3){ animation-delay: 0.4s; }
+
+        @keyframes blink { 
+            0%, 80%, 100% { opacity: 0.3; } 
+            40% { opacity: 1; } 
+        }
+
+        #chatbot-quick {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding: 8px;
+            border-top: 1px solid #ddd;
+        }
+
+        #chatbot-quick button {
+            flex: 1;
+            padding: 6px 8px;
+            border: none;
+            border-radius: 8px;
+            background: hsl(213 94% 90%);
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        #chatbot-quick button:hover { 
+            background: hsl(213 94% 75%); 
+        }
+
+        .chat-input-container { 
+            display: flex; 
+            border-top: 1px solid #ddd; 
+        }
+
+        #chatbot-input {
+            flex: 1; 
+            border: none; 
+            padding: 10px; 
+            font-size: 0.9rem;
+            border-radius: 0 0 0 12px; 
+            outline: none;
+        }
+
+        #chatbot-send {
+            background: hsl(25 95% 53%);
+            color: #fff; 
+            border: none; 
+            padding: 10px 15px;
+            border-radius: 0 0 12px 0; 
+            cursor: pointer;
+        }
+
+        #chatbot-send:hover { 
+            background: hsl(25 95% 45%); 
+        }
+
+        /* Responsive chatbot */
+        @media (max-width: 480px) {
+            #chatbot-window {
+                width: 280px;
+                right: 0;
+            }
+            
+            #chatbot-widget {
+                right: 10px;
+                bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="logo">🌍 TravelBook</div>
+        <h2 class="signup-title">Create Your Account</h2>
+        <form id="signupForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">First Name</label>
+                    <input type="text" id="firstName" class="form-input" placeholder="Enter your first name" required>
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Last Name</label>
+                    <input type="text" id="lastName" class="form-input" placeholder="Enter your last name" required>
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Email</label>
+                <input type="email" id="email" class="form-input" placeholder="Enter your email" required>
+                <i class="fas fa-envelope"></i>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Phone Number</label>
+                <input type="tel" id="phone" class="form-input" placeholder="Enter your phone number" required>
+                <i class="fas fa-phone"></i>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" id="password" class="form-input" placeholder="Create a password" required>
+                <button type="button" class="password-toggle" id="togglePassword">
+                    <i class="fas fa-eye"></i>
+                </button>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Confirm Password</label>
+                <input type="password" id="confirmPassword" class="form-input" placeholder="Confirm your password" required>
+                <button type="button" class="password-toggle" id="toggleConfirmPassword">
+                    <i class="fas fa-eye"></i>
+                </button>
+                <div id="passwordError" class="error-message">Passwords do not match</div>
+            </div>
+            
+            <div class="terms-group">
+                <input type="checkbox" id="terms" required>
+                <label for="terms" class="terms-text">
+                    I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                </label>
+            </div>
+            
+            <button type="submit" class="btn-signup">Create Account</button>
+            <div id="successMessage" class="success-message">Account created successfully! Redirecting...</div>
+            <div id="errorMessage" class="error-message">There was an error creating your account. Please try again.</div>
+            
+            <div class="links">
+                <a href="login.html">Already have an account? Login</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Floating Chatbot Widget -->
+    <div id="chatbot-widget">
+        <button id="chatbot-toggle">💬</button>
+        <div id="chatbot-window" class="hidden">
+            <div id="chatbot-header">
+                TravelBot 
+                <span id="chatbot-close">✖</span>
+            </div>
+            <div id="chatbot-messages"></div>
+            <div id="chatbot-quick">
+                <button data-msg="signup">📝 Signup Help</button>
+                <button data-msg="flights">✈ Flights</button>
+                <button data-msg="help">❓ Help</button>
+            </div>
+            <div class="chat-input-container">
+                <input type="text" id="chatbot-input" placeholder="Type a message..." />
+                <button id="chatbot-send">➤</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form validation and submission
+        const signupForm = document.getElementById("signupForm");
+        const passwordInput = document.getElementById("password");
+        const confirmPasswordInput = document.getElementById("confirmPassword");
+        const passwordError = document.getElementById("passwordError");
+        const successMessage = document.getElementById("successMessage");
+        const errorMessage = document.getElementById("errorMessage");
+        const togglePassword = document.getElementById("togglePassword");
+        const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
+
+        // Password visibility toggle
+        togglePassword.addEventListener("click", function() {
+            const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+            passwordInput.setAttribute("type", type);
+            this.querySelector("i").classList.toggle("fa-eye");
+            this.querySelector("i").classList.toggle("fa-eye-slash");
+        });
+
+        toggleConfirmPassword.addEventListener("click", function() {
+            const type = confirmPasswordInput.getAttribute("type") === "password" ? "text" : "password";
+            confirmPasswordInput.setAttribute("type", type);
+            this.querySelector("i").classList.toggle("fa-eye");
+            this.querySelector("i").classList.toggle("fa-eye-slash");
+        });
+
+        // Password confirmation validation
+        confirmPasswordInput.addEventListener("input", function() {
+            if (passwordInput.value !== confirmPasswordInput.value) {
+                passwordError.style.display = "block";
+            } else {
+                passwordError.style.display = "none";
+            }
+        });
+
+        // Form submission
+        signupForm.addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            // Reset messages
+            successMessage.style.display = "none";
+            errorMessage.style.display = "none";
+
+            // Validate passwords match
+            if (passwordInput.value !== confirmPasswordInput.value) {
+                passwordError.style.display = "block";
+                return;
+            }
+
+            // Get form data
+            const formData = {
+                firstName: document.getElementById("firstName").value,
+                lastName: document.getElementById("lastName").value,
+                email: document.getElementById("email").value,
+                phone: document.getElementById("phone").value,
+                password: passwordInput.value
+            };
+
+            // In a real application, you would send this data to your server
+            // For this demo, we'll simulate a successful signup
+            console.log("Signup data:", formData);
+
+            // Simulate API call
+            setTimeout(() => {
+                successMessage.style.display = "block";
+                
+                // Redirect to login page after successful signup
+                setTimeout(() => {
+                    window.location.href = "login.html";
+                }, 2000);
+            }, 1000);
+        });
+
+        // Floating Chatbot functionality
+        const chatbotToggle = document.getElementById("chatbot-toggle");
+        const chatWindow = document.getElementById("chatbot-window");
+        const closeBtn = document.getElementById("chatbot-close");
+        const messages = document.getElementById("chatbot-messages");
+        const input = document.getElementById("chatbot-input");
+        const sendBtn = document.getElementById("chatbot-send");
+        const quickBtns = document.querySelectorAll("#chatbot-quick button");
+
+        // Toggle chatbot open/close
+        chatbotToggle.addEventListener("click", () => {
+            chatWindow.classList.toggle("hidden");
+        });
+
+        closeBtn.addEventListener("click", () => {
+            chatWindow.classList.add("hidden");
+        });
+
+        // Send message function
+        function sendMessage(text, sender="user") {
+            const msg = document.createElement("div");
+            msg.className = `msg ${sender}`;
+            msg.textContent = text;
+            messages.appendChild(msg);
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        // Show typing indicator
+        function showTyping() {
+            const typing = document.createElement("div");
+            typing.className = "msg bot typing";
+            typing.innerHTML = "<span></span><span></span><span></span>";
+            messages.appendChild(typing);
+            messages.scrollTop = messages.scrollHeight;
+            return typing;
+        }
+
+        // Remove typing indicator
+        function removeTyping() {
+            const typing = document.querySelector(".typing");
+            if (typing) typing.remove();
+        }
+
+        // Bot response logic
+        function botReply(userText) {
+            let reply = "🤖 I'm TravelBot! I can help you with account creation, flights, trains, and cab bookings. What do you need?";
+
+            const text = userText.toLowerCase();
+            
+            if (text.includes("signup") || text.includes("register") || text.includes("account")) {
+                reply = "📝 To create an account, just fill out the form with your details. Make sure your passwords match and you agree to our terms!";
+            } else if (text.includes("hello") || text.includes("hi") || text.includes("hey")) {
+                reply = "👋 Hello! Welcome to TravelBook signup! How can I assist you today?";
+            } else if (text.includes("flight") || text.includes("fly") || text.includes("airplane")) {
+                reply = "✈️ I can help you book flights! Once you create an account, visit our Flights page to search for domestic and international flights.";
+            } else if (text.includes("train") || text.includes("railway")) {
+                reply = "🚆 Train bookings are available after signup! Check our Trains page for real-time availability across India.";
+            } else if (text.includes("cab") || text.includes("taxi") || text.includes("car")) {
+                reply = "🚗 Need a cab? After signing up, visit our Cabs page to book local and outstation rides.";
+            } else if (text.includes("help") || text.includes("support")) {
+                reply = "❓ Our support team is available 24/7. Contact us at support@travelbook.com or call +91 98765 43210";
+            } else if (text.includes("thank") || text.includes("thanks")) {
+                reply = "😊 You're welcome! Happy to help with your travel needs.";
+            }
+
+            sendMessage(reply, "bot");
+        }
+
+        // Handle message sending
+        function handleSend() {
+            const text = input.value.trim();
+            if (!text) return;
+            
+            sendMessage(text, "user");
+            input.value = "";
+            
+            const typing = showTyping();
+            setTimeout(() => {
+                removeTyping();
+                botReply(text);
+            }, 1000);
+        }
+
+        // Event listeners
+        sendBtn.addEventListener("click", handleSend);
+        input.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") handleSend();
+        });
+
+        // Quick button handlers
+        quickBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                const text = btn.dataset.msg;
+                sendMessage(text, "user");
+                const typing = showTyping();
+                setTimeout(() => {
+                    removeTyping();
+                    botReply(text);
+                }, 1000);
+            });
+        });
+
+        // Auto welcome message
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                sendMessage("👋 Hi! I'm TravelBot. I can help you with the signup process and answer questions about our services. How can I assist you?", "bot");
+            }, 1500);
+        });
+    </script>
+
+    <!-- FontAwesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
